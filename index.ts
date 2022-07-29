@@ -155,4 +155,6 @@ gameRunner({
     lastIndex: new Array<number>(6).fill(-1),
     numberOfPlayers: 2,
     currPlayer: 0
-}).then(console.log)
+}).then(v =>
+    console.log(v == 0 ? 'Game ends in a draw!' : `Player ${v} wins!`)
+)
