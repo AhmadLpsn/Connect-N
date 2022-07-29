@@ -105,7 +105,7 @@ const applyInput = (x: number, game: Game): Index => {
 const isFinished = (game: Game) => {
     let finished = true;
     game.lastIndex.forEach(v => {
-        finished &&= (v == game.grid[0].length)
+        finished &&= (v == (game.grid[0].length - 1))
     })
     return finished
 }
