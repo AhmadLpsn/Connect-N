@@ -1,3 +1,4 @@
+/** function for reading user inputs  */
 async function readLine(question: string = ''): Promise<string> {
 
     return new Promise((res, rej) => {
@@ -16,17 +17,34 @@ async function readLine(question: string = ''): Promise<string> {
 
 }
 
+/** 2D grid index  */
 interface Index {
     x: number,
     y: number
 }
+
+/** #### Game
+ * Game required info
+ *  
+ * @property n : the requird number to be filled in the row
+ * @property currPlayer : index of the current player starts with 1
+ * @property numberOfPlayers : number of player in this game default is 2
+ * @property grid : 2D-grid of the game
+ * @property lastIndex : stores index of the last filled row in each column
+ * */
 interface Game {
-    n: number;
+    n: number; 
     currPlayer?: number;
     numberOfPlayers: number;
     grid: number[][];
     lastIndex: number[];
 }
+
+/** #### checker 
+ * @param index position of the last filled place in the 2D game-grid
+ * @param game game instance
+ * @returns True if their are N in the checked row
+ * */
 type Checker = (index: Index, game: Game) => boolean
 const checkers: { [key: string]: Checker } = {}
 
@@ -95,6 +113,11 @@ checkers['Horizental'] = ({ x, y }, game) => {
     return count == n;
 }
 
+/** #### applyInput 
+ * @param x the selected column 
+ * @param game game instance
+ * @returns index of the last filled place
+ * */
 const applyInput = (x: number, game: Game): Index => {
     if (x >= game.grid.length || game.lastIndex[x] == game.grid[0].length - 1 || x < 0)
         throw Error("Invalid Move!")
@@ -102,14 +125,23 @@ const applyInput = (x: number, game: Game): Index => {
     game.grid[x][y] = game.currPlayer;
     return { x, y }
 }
-const isFinished = (game: Game) => {
+
+/** #### isFinished  
+ * @param game game instance
+ * @returns True if all the columns were filled
+ * */
+const isFinished = (game: Game):boolean => {
     let finished = true;
     game.lastIndex.forEach(v => {
         finished &&= (v == (game.grid[0].length - 1))
     })
     return finished
 }
-
+/** #### printGrid  
+ * prints the 2D grid of the game
+ * @param game game instance
+ * 
+ * */
 const printGrid = ({ grid }: Game) => {
 
     for (let y = grid[0].length - 1; y >= 0; y--) {
@@ -121,6 +153,11 @@ const printGrid = ({ grid }: Game) => {
 
 }
 
+/** #### gameRunner  
+ * starts the game loop
+ * @param game game instance
+ * 
+ * */
 const gameRunner = async (game: Game) => {
     printGrid(game)
     game.currPlayer = 1;
@@ -136,7 +173,7 @@ const gameRunner = async (game: Game) => {
                     return game.currPlayer
             }
             --game.currPlayer
-            game.currPlayer = ((game.currPlayer + 1) % game.numberOfPlayers) + 1;
+            game.currPlayer = ((game.currPlayer + 1) % game.numberOfPlayers) + 1; /** this line helps to determinate the next player */
         } catch (err) {
             console.log(err.message)
         }
