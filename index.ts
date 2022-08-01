@@ -27,8 +27,8 @@ interface Index {
  * Game required info
  *  
  * @property n : the requird number to be filled in the row
- * @property currPlayer : index of the current player starts with 1
- * @property numberOfPlayers : number of player in this game default is 2
+ * @property currPlayer : index of the current player, starts with 1
+ * @property numberOfPlayers : number of player in this game, default is 2
  * @property grid : 2D-grid of the game
  * @property lastIndex : stores index of the last filled row in each column
  * */
