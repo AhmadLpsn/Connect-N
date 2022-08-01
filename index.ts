@@ -159,10 +159,14 @@ const printGrid = ({ grid }: Game) => {
  * 
  * */
 const gameRunner = async (game: Game) => {
-    printGrid(game)
+    
     game.currPlayer = 1;
     game.n = parseInt(await readLine("Enter N: "));
     game.numberOfPlayers = parseInt(await readLine("Number of Players: "));
+
+    printGrid(game)
+    console.log(`You are playing Connect ${game.n}! The first player to get ${game.n} pieces of the same color\nvertically, horizontally, or diagonally wins.`)
+
     while (!isFinished(game)) {
         try {
             const userInput: number = parseInt(await readLine(`Player ${game.currPlayer}'s turn: `))// must be taken from user
