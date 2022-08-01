@@ -18,4 +18,4 @@ that leads to ``` O(4N) ``` in worst case and ``` O(N) ``` in good case as the r
 
 ## runTime of the whole game
 
-if players end the game with a draw result that's led to complexity in the form of O(4*N*A*B) for the ``` gameRunner (game: Game ) ```.
+if players end the game with a draw result that's led to complexity in the form of ``` O(4*N*A*B) ``` for the ``` gameRunner (game: Game ) ```.
